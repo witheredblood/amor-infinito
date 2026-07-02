@@ -142,13 +142,7 @@ function initEnvelopeAndLetter() {
     const closeModalBtn = document.getElementById('close-modal-btn');
 
     if (!letterModal) return; // envelope may be absent after redesign
-    // Toggle expansion of the letter sheet on click
-    const letterSheet = document.getElementById('letter-sheet-element');
-    if (letterSheet) {
-        letterSheet.addEventListener('click', () => {
-            letterSheet.classList.toggle('expanded');
-        });
-    }
+
 
     // Sincronizar contenido
     if (letterOutputText && modalLetterBody) {
