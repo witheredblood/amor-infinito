@@ -304,19 +304,25 @@ body {
 }
 
 .envelope-wrapper {
+    --env-w: 380px;
+    --env-h: 260px;
+    --env-half-w: calc(var(--env-w) / 2);
+    --env-half-h: calc(var(--env-h) / 2);
     perspective: 1200px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    height: 480px;
+    height: calc(var(--env-h) + 140px);
+    width: var(--env-w);
+    transition: var(--transition-smooth);
 }
 
 .envelope {
     position: relative;
-    width: 380px;
-    height: 260px;
+    width: var(--env-w);
+    height: var(--env-h);
     background-color: #5c0f1b;
     border-radius: 4px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
@@ -352,7 +358,7 @@ body {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 130px 190px 130px 0;
+    border-width: var(--env-half-h) var(--env-half-w) var(--env-half-h) 0;
     border-color: transparent #5c0f1b transparent transparent;
     filter: drop-shadow(-4px 4px 10px rgba(0, 0, 0, 0.15));
 }
@@ -365,7 +371,7 @@ body {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 130px 0 130px 190px;
+    border-width: var(--env-half-h) 0 var(--env-half-h) var(--env-half-w);
     border-color: transparent transparent transparent #5c0f1b;
     filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.15));
 }
@@ -411,7 +417,7 @@ body {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 140px 190px 0 190px;
+    border-width: calc(var(--env-half-h) + 10px) var(--env-half-w) 0 var(--env-half-w);
     border-color: #5c0f1b transparent transparent transparent;
     transform-origin: top center;
     z-index: 55;
@@ -422,18 +428,18 @@ body {
 /* Hoja de papel (Carta) */
 .letter-sheet {
     position: absolute;
-    bottom: 10px;
-    left: 20px;
-    right: 20px;
-    height: 230px;
+    bottom: 5px;
+    left: 5%;
+    width: 90%;
+    height: calc(var(--env-h) - 10px);
     background: #faebed;
     border-radius: 2px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     z-index: 20;
     overflow: hidden;
-    padding: 1.8rem;
-    box-sizing: border-box;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0s;
+    cursor: pointer;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), height var(--transition-smooth);
+    padding: 1.5rem 1rem;
 }
 
 .letter-paper-content {
@@ -447,15 +453,15 @@ body {
 .letter-stamp {
     font-size: 1.8rem;
     color: var(--color-primary);
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.5rem;
     animation: heartBeat 1.8s infinite;
 }
 
 .letter-body {
     font-family: var(--font-heading);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #36050b;
-    line-height: 1.7;
+    line-height: 1.6;
     text-align: center;
     width: 100%;
     overflow: hidden;
@@ -473,15 +479,14 @@ body {
 }
 
 .envelope.open .letter-sheet {
-    transform: translateY(-160px) scaleY(1.5);
+    transform: translateY(calc(var(--env-h) * -0.65)) scaleY(1.05);
     z-index: 45;
-    height: 240px;
     transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .envelope-instructions {
-    margin-top: 2rem;
+    margin-top: 1.5rem;
     font-weight: 600;
     color: var(--color-gold);
     font-size: 0.95rem;
@@ -530,12 +535,12 @@ body {
 
 .close-modal-btn {
     position: absolute;
-    top: -45px;
-    right: 0;
+    top: 15px;
+    right: 20px;
     background: none;
     border: none;
-    color: var(--color-gold);
-    font-size: 2.2rem;
+    color: var(--color-primary);
+    font-size: 1.8rem;
     cursor: pointer;
     transition: var(--transition-smooth);
     outline: none;
@@ -544,7 +549,7 @@ body {
 
 .close-modal-btn:hover {
     transform: rotate(90deg) scale(1.1);
-    color: var(--color-text-dark);
+    color: var(--color-gold);
 }
 
 .modal-paper {
@@ -824,12 +829,21 @@ body {
         display: none;
     }
 
-    /* Escalar sobre y carta para evitar overflow */
+    /* Redefine envelope dimensions using variables for small screens */
     .envelope-wrapper {
-        width: 90%;
-        max-width: 350px;
+        --env-w: 320px;
+        --env-h: 220px;
+        height: calc(var(--env-h) + 120px);
         margin: 0 auto 20px auto;
-        height: auto;
+    }
+
+    .modal-paper {
+        padding: 2.5rem 1.25rem;
+    }
+
+    .modal-body {
+        font-size: 1rem;
+        line-height: 1.8;
     }
 
     .hero-title {
@@ -859,15 +873,10 @@ body {
 
 @media (max-width: 400px) {
     .envelope-wrapper {
-        width: 90%;
-        max-width: 300px;
+        --env-w: 280px;
+        --env-h: 190px;
+        height: calc(var(--env-h) + 105px);
         margin: 0 auto 20px auto;
-        height: auto;
-    }
-
-    .envelope {
-        width: 100%;
-        height: auto;
     }
 
     .hero-title {
@@ -890,15 +899,10 @@ body {
 /* ==== RESPONSIVE ADJUSTMENTS FOR MID‑SMALL SCREENS (401‑480px) ==== */
 @media (min-width:401px) and (max-width:480px) {
     .envelope-wrapper {
-        width: 90%;
-        max-width: 320px;
+        --env-w: 300px;
+        --env-h: 205px;
+        height: calc(var(--env-h) + 115px);
         margin: 0 auto 20px auto;
-        height: auto;
-    }
-
-    .envelope {
-        width: 100%;
-        height: auto;
     }
 
     .qr-frame img {
@@ -929,5 +933,3 @@ body {
         display: inline-block;
     }
 }
-
-/* End of responsive adjustments */

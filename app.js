@@ -141,7 +141,14 @@ function initEnvelopeAndLetter() {
     const modalLetterBody = document.getElementById('modal-letter-body');
     const closeModalBtn = document.getElementById('close-modal-btn');
 
-    if (!envelope || !letterModal) return;
+    if (!letterModal) return; // envelope may be absent after redesign
+    // Toggle expansion of the letter sheet on click
+    const letterSheet = document.getElementById('letter-sheet-element');
+    if (letterSheet) {
+        letterSheet.addEventListener('click', () => {
+            letterSheet.classList.toggle('expanded');
+        });
+    }
 
     // Sincronizar contenido
     if (letterOutputText && modalLetterBody) {
@@ -150,23 +157,25 @@ function initEnvelopeAndLetter() {
 
     let modalTimer = null;
 
-    // Toggle sobre abierto/cerrado al hacer click en el sobre
-    envelope.addEventListener('click', (e) => {
-        // Si hicieron clic en el papel de la carta que sobresale, abrir modal de inmediato
-        if (e.target.closest('.letter-sheet')) {
-            openReadingModal();
-            return;
-        }
-        
-        if (envelope.classList.contains('open')) {
-            closeEnvelope();
-        } else {
-            openEnvelope();
-        }
-    });
+    if (envelope) {
+        // Toggle sobre abierto/cerrado al hacer click en el sobre
+        envelope.addEventListener('click', (e) => {
+            // Si hicieron clic en el papel de la carta que sobresale, abrir modal de inmediato
+            if (e.target.closest('.letter-sheet')) {
+                openReadingModal();
+                return;
+            }
+            
+            if (envelope.classList.contains('open')) {
+                closeEnvelope();
+            } else {
+                openEnvelope();
+            }
+        });
+    }
 
     function openEnvelope() {
-        envelope.classList.add('open');
+        if (envelope) envelope.classList.add('open');
         if (instructionText) {
             instructionText.textContent = 'Abriendo tu carta... ♥';
         }
@@ -178,7 +187,7 @@ function initEnvelopeAndLetter() {
     }
 
     function closeEnvelope() {
-        envelope.classList.remove('open');
+        if (envelope) envelope.classList.remove('open');
         if (instructionText) {
             instructionText.textContent = '¡Haz clic sobre el sobre para abrir tu carta de amor!';
         }
