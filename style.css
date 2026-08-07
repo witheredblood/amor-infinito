@@ -605,24 +605,29 @@ body {
 }
 
 .song-container {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 4rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    max-width: 950px;
+    text-align: center;
+    max-width: 800px;
     margin: 0 auto;
+    padding: 3rem 2.5rem;
 }
 
 .song-details {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 1.5rem;
+    width: 100%;
 }
 
 .song-details h3 {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
-    color: var(--color-text-dark);
+    font-size: 2rem;
+    color: var(--color-gold);
+    text-align: center;
 }
 
 .song-message {
