@@ -645,45 +645,6 @@ body {
     border: 1px solid rgba(212, 175, 55, 0.15);
 }
 
-.qr-code-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.2rem;
-}
-
-.qr-frame {
-    background: white;
-    padding: 1.5rem;
-    border-radius: var(--border-radius-md);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    border: 3px solid var(--color-gold);
-    display: inline-block;
-    transition: var(--transition-smooth);
-}
-
-.qr-frame:hover {
-    transform: scale(1.05) rotate(1deg);
-    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.35);
-}
-
-.qr-frame img {
-    display: block;
-    width: 200px;
-    height: 200px;
-    border-radius: var(--border-radius-sm);
-}
-
-.qr-caption {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--color-gold);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    animation: heartBeat 2s infinite;
-}
-
 /* ==========================================================================
    FOOTER
    ========================================================================== */
