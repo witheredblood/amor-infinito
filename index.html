@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Amor Infinito - Un espacio especial e interactivo dedicado a ti, con una carta de amor y una canción especial.">
-    <title>Amor Infinito | Una Dedicatoria Especial</title>
+        content="Amor Infinito - Un espacio especial e interactivo dedicado a ti, con una carta de amor, nuestra canción, tiempo juntos y cupones especiales.">
+    <title>Amor Infinito | Una Dedicatoria Especial para Vane</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- CSS Stylesheet -->
@@ -21,17 +21,25 @@
 
 <body>
 
-    <!-- Canvas para Partículas de Corazón -->
+    <!-- Canvas para Partículas de Corazón y Destellos -->
     <canvas id="particles-canvas"></canvas>
 
     <!-- Barra de Navegación / Header -->
     <header class="main-header">
-        <div class="logo">
+        <div class="logo" id="logo-btn">
             <span class="heart-icon">♥</span> Amor Infinito
         </div>
-        <nav class="nav-links">
+        <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="nav-links" id="nav-links-menu">
+            <a href="#contador" class="nav-link">Nuestro Tiempo</a>
             <a href="#carta" class="nav-link">Carta de Amor</a>
-            <a href="#cancion" class="nav-link">Canción Dedicada</a>
+            <a href="#razones" class="nav-link">Frasco de Razones</a>
+            <a href="#recuerdos" class="nav-link">Galería de Recuerdos</a>
+            <a href="#cancion" class="nav-link">Nuestra Playlist</a>
         </nav>
     </header>
 
@@ -39,11 +47,13 @@
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
             <div class="hero-content">
-                <h1 class="hero-title animate-pop-in">Especialmente Para Ti</h1>
-                <p class="hero-subtitle animate-fade-in-delayed">Un rincón mágico creado con cariño. Porque hay
-                    sentimientos que solo se pueden expresar con una carta y una canción.</p>
+                <span class="hero-badge animate-pop-in">✨ Creado Especialmente Para Ti ✨</span>
+                <h1 class="hero-title animate-pop-in">Te Amo Vane</h1>
+                <p class="hero-subtitle animate-fade-in-delayed">Un rincón mágico interactivo hecho a la medida. Porque hay
+                    sentimientos que superan el tiempo, las palabras y cualquier distancia.</p>
                 <div class="hero-actions animate-fade-in-delayed">
-                    <a href="#carta" class="btn btn-primary" id="btn-start">Abrir la Carta</a>
+                    <a href="#contador" class="btn btn-primary" id="btn-start">Descubrir Nuestro Tiempo ♥</a>
+                    <a href="#carta" class="btn btn-secondary">Abrir la Carta ✉️</a>
                 </div>
             </div>
             <div class="hero-scroll-indicator">
@@ -51,11 +61,51 @@
             </div>
         </section>
 
+        <!-- Sección: Contador de Tiempo Juntos -->
+        <section id="contador" class="section counter-section">
+            <div class="section-header">
+                <span class="section-tagline">Cada Segundo A Tu Lado Cuenta</span>
+                <h2 class="section-title">Nuestro Tiempo Juntos</h2>
+                <div class="header-divider"></div>
+                <p class="section-subtitle">Desde que comenzaste a llenar mis días de sonrisas y momentos inolvidables.</p>
+            </div>
+
+            <div class="counter-card glass-card">
+                <div class="counter-heart-ticker">
+                    <span class="pulse-heart">♥</span>
+                    <span class="ticker-text" id="ticker-status-text">Contando cada instante a tu lado...</span>
+                </div>
+
+                <div class="counter-grid">
+                    <div class="counter-box">
+                        <div class="counter-value" id="days-val">00</div>
+                        <div class="counter-label">Días</div>
+                    </div>
+                    <div class="counter-box">
+                        <div class="counter-value" id="hours-val">00</div>
+                        <div class="counter-label">Horas</div>
+                    </div>
+                    <div class="counter-box">
+                        <div class="counter-value" id="minutes-val">00</div>
+                        <div class="counter-label">Minutos</div>
+                    </div>
+                    <div class="counter-box">
+                        <div class="counter-value" id="seconds-val">00</div>
+                        <div class="counter-label">Segundos</div>
+                    </div>
+                </div>
+
+                <div class="counter-footer" style="justify-content: center;">
+                    <p class="counter-caption" id="counter-since-text">Calculado desde el 10 de julio de 2026 ✨</p>
+                </div>
+            </div>
+        </section>
+
         <!-- Sección: Carta de Amor Digital -->
         <section id="carta" class="section letter-section">
             <div class="section-header">
-                <span class="section-tagline">Un Mensaje Especial</span>
-                <h2 class="section-title">carta para ti</h2>
+                <span class="section-tagline">Un Mensaje Desde El Corazón</span>
+                <h2 class="section-title">Carta Para Ti</h2>
                 <div class="header-divider"></div>
             </div>
 
@@ -113,40 +163,100 @@
             <div class="envelope-instructions">
                 <p id="envelope-instruction-text">¡Haz clic sobre el sobre para abrir tu carta de amor!</p>
                 <div style="margin-top: 1.5rem;">
-                    <a href="#cancion" class="btn btn-secondary" id="btn-go-to-song">Escuchar Nuestra Canción ❤️</a>
+                    <a href="#razones" class="btn btn-secondary" id="btn-go-to-reasons">Ver Razones por las que te amo ❤️</a>
                 </div>
             </div>
         </section>
 
-        <!-- Sección: Nuestra Canción -->
+        <!-- Sección: Frasco de Razones -->
+        <section id="razones" class="section jar-section">
+            <div class="section-header">
+                <span class="section-tagline">Pequeños Detalles que enamoran</span>
+                <h2 class="section-title">Frasco de Razones</h2>
+                <div class="header-divider"></div>
+                <p class="section-subtitle">Haz clic en el botón para sacar una nota especial con un motivo de por qué me encantas tanto.</p>
+            </div>
+
+            <div class="jar-container glass-card">
+                <div class="jar-visual-side">
+                    <div class="jar-wrapper" id="jar-element">
+                        <div class="jar-lid"></div>
+                        <div class="jar-body">
+                            <div class="jar-tag">♥ Para Vane ♥</div>
+                            <div class="jar-hearts-inside">
+                                <span class="jar-floating-item f1">💌</span>
+                                <span class="jar-floating-item f2">💖</span>
+                                <span class="jar-floating-item f3">💕</span>
+                                <span class="jar-floating-item f4">✨</span>
+                                <span class="jar-floating-item f5">🌹</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="jar-interactive-side">
+                    <div class="love-note-card" id="love-note-card">
+                        <div class="note-pin">📌</div>
+                        <span class="note-stamp">Razones por las que me gustas #<span id="note-number">1</span></span>
+                        <div class="note-content-wrapper">
+                            <p id="note-text" class="note-text">"Me encanta cómo tu sonrisa ilumina al instante hasta el día más difícil."</p>
+                        </div>
+                        <span class="note-signature">Siempre tuyo, con todo mi corazón ♥</span>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-draw-note" id="btn-draw-note">
+                        <span>Sacar Otra Razón</span> ✨❤️
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección: Galería de Recuerdos -->
+        <section id="recuerdos" class="section gallery-section">
+            <div class="section-header">
+                <span class="section-tagline">Nuestros Momentos Inolvidables</span>
+                <h2 class="section-title">Galería de Recuerdos</h2>
+                <div class="header-divider"></div>
+                <p class="section-subtitle">Aquí podrás poner las fotos que te gusten, puedes escribir algún mensajito, quedarán guardados de forma local por el momento ♥</p>
+            </div>
+
+            <div class="gallery-actions-bar">
+                <button class="btn btn-primary" id="btn-add-memory">➕ Subir Nuevo Recuerdo 📸</button>
+            </div>
+
+            <div class="polaroid-grid" id="polaroid-grid">
+                <!-- Se cargan dinámicamente las fotos guardadas o por defecto -->
+            </div>
+        </section>
+
+        <!-- Sección: Nuestra Playlist -->
         <section id="cancion" class="section song-section">
             <div class="section-header">
-                <span class="section-tagline">Canción Dedicada</span>
-                <h2 class="section-title">Una Canción Para Ti</h2>
+                <span class="section-tagline">Nuestra Música</span>
+                <h2 class="section-title">Playlist Dedicada a Ti</h2>
                 <div class="header-divider"></div>
             </div>
 
             <div class="song-container glass-card">
                 <div class="song-details">
-                    <h3>Una melodía que dedico a tu corazón</h3>
+                    <h3>Canciones que me hacen pensar en ti</h3>
                     <p class="song-message">
-                        No quiero que escuches esta canción pensando solo en la letra. Quiero que la escuches sabiendo
-                        que, desde ahora, cada vez que yo la ponga, voy a pensar en nosotros.
+                        No es solo una lista de canciones. Cada uno de estos temas guarda un pensamiento, un recuerdo o una emoción que me lleva directamente a ti. No importa qué esté haciendo o en dónde me encuentre: cuando suenan estas melodías, mi mente y mi corazón vuelan hacia ti.
                     </p>
                     <div class="spotify-embed-container">
                         <iframe style="border-radius:12px"
-                            src="https://open.spotify.com/embed/track/1OubIZ0ARYCUq5kceYUQiO?utm_source=generator&theme=0"
-                            width="100%" height="152" frameBorder="0" allowfullscreen=""
+                            src="https://open.spotify.com/embed/playlist/7vQYN0Fy4oO7p8uipbTxJc?utm_source=generator&theme=0&v=2"
+                            width="100%" height="380" frameBorder="0" allowfullscreen=""
                             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                             loading="lazy"></iframe>
                     </div>
                 </div>
                 <div class="qr-code-container">
                     <div class="qr-frame">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fopen.spotify.com%2Fintl-es%2Ftrack%2F1OubIZ0ARYCUq5kceYUQiO%3Fsi%3Dd1be246ca53447c5&color=7c192d&bgcolor=ffffff"
-                            alt="Spotify Song QR Code" id="spotify-qr-code">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https%3A%2F%2Fopen.spotify.com%2Fplaylist%2F7vQYN0Fy4oO7p8uipbTxJc%3Fsi%3D35102be17b214757&color=7c192d&bgcolor=ffffff"
+                            alt="Spotify Playlist QR Code" id="spotify-qr-code">
                     </div>
-                    <span class="qr-caption">Escanéame con Spotify ♥</span>
+                    <span class="qr-caption">Escanéame en Spotify ♥</span>
                 </div>
             </div>
         </section>
@@ -161,7 +271,41 @@
                 <div class="modal-body" id="modal-letter-body"></div>
                 <div class="modal-actions"
                     style="margin-top: 2rem; width: 100%; display: flex; justify-content: center;">
-                    <button id="modal-song-btn" class="btn btn-primary">Escuchar Nuestra Canción ♥</button>
+                    <button id="modal-song-btn" class="btn btn-primary">Escuchar Nuestra Playlist ♥</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Subir/Editar Recuerdo -->
+    <div id="memory-modal" class="modal-backdrop hidden">
+        <div class="modal-card date-modal-card">
+            <button id="close-memory-modal-btn" class="close-modal-btn" aria-label="Cerrar">✕</button>
+            <div class="date-modal-content glass-card">
+                <h3 class="modal-title">📸 Guardar Un Recuerdo</h3>
+                <p class="modal-subtitle">Sube una foto especial con Vane y escribe una breve nota o fecha:</p>
+                
+                <div class="input-group">
+                    <label for="memory-title-input" class="input-label">Título o Nota:</label>
+                    <input type="text" id="memory-title-input" class="text-input" placeholder="Ej: Nuestra tarde juntos en el parque ♥">
+                </div>
+
+                <div class="input-group">
+                    <label for="memory-date-input" class="input-label">Fecha del Momento:</label>
+                    <input type="date" id="memory-date-input" class="text-input">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">Seleccionar Foto:</label>
+                    <input type="file" id="memory-file-input" accept="image/*" class="file-input">
+                </div>
+
+                <div id="memory-preview-container" class="memory-preview-container hidden">
+                    <img id="memory-preview-img" src="" alt="Previsualización de la foto">
+                </div>
+
+                <div class="modal-buttons" style="margin-top: 1.5rem;">
+                    <button id="btn-save-memory" class="btn btn-primary">Guardar Recuerdo ♥</button>
                 </div>
             </div>
         </div>
@@ -169,7 +313,7 @@
 
     <!-- Footer -->
     <footer class="main-footer">
-        <p>&copy; 2026 Amor Infinito. Hecho con ♥ para ti.</p>
+        <p>&copy; 2026 Amor Infinito. Hecho con todo el ♥ para Vane.</p>
     </footer>
 
     <!-- JS Logic -->
