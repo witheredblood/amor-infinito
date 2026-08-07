@@ -492,15 +492,34 @@ async function initLoveMemories() {
 
     renderMemories();
 
-    // Eventos del modal para subir imágenes
-    if (btnAddMemory && memoryModal) {
+    const directInput = document.getElementById('direct-memory-input');
+
+    // Al hacer clic en el botón principal, abrir la galería de fotos del celular directamente
+    if (btnAddMemory && directInput) {
         btnAddMemory.addEventListener('click', () => {
-            titleInput.value = '';
-            dateInput.value = '';
-            fileInput.value = '';
-            selectedBase64Image = '';
-            previewContainer.classList.add('hidden');
-            memoryModal.classList.add('visible');
+            directInput.click();
+        });
+    }
+
+    // Handler al seleccionar una foto de la galería del dispositivo
+    if (directInput) {
+        directInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                selectedBase64Image = event.target.result;
+                
+                // Pre-cargar foto en el modal de confirmación con nota
+                if (previewImg) previewImg.src = selectedBase64Image;
+                if (previewContainer) previewContainer.classList.remove('hidden');
+                if (titleInput) titleInput.value = '';
+                if (dateInput) dateInput.value = '';
+
+                if (memoryModal) memoryModal.classList.add('visible');
+            };
+            reader.readAsDataURL(file);
         });
     }
 
@@ -510,7 +529,7 @@ async function initLoveMemories() {
         });
     }
 
-    // Previsualización de la imagen al seleccionarla
+    // Previsualización adicional por si seleccionan desde el modal
     if (fileInput) {
         fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
@@ -518,8 +537,8 @@ async function initLoveMemories() {
                 const reader = new FileReader();
                 reader.onload = (event) => {
                     selectedBase64Image = event.target.result;
-                    previewImg.src = selectedBase64Image;
-                    previewContainer.classList.remove('hidden');
+                    if (previewImg) previewImg.src = selectedBase64Image;
+                    if (previewContainer) previewContainer.classList.remove('hidden');
                 };
                 reader.readAsDataURL(file);
             }
@@ -529,15 +548,17 @@ async function initLoveMemories() {
     // Guardar nuevo recuerdo en IndexedDB
     if (btnSaveMemory) {
         btnSaveMemory.addEventListener('click', async () => {
-            const title = titleInput.value.trim() || 'Momento Inolvidable ♥';
-            let dateStr = dateInput.value;
+            const title = (titleInput ? titleInput.value.trim() : '') || 'Momento Inolvidable ♥';
+            let dateStr = dateInput ? dateInput.value : '';
             
             if (dateStr) {
                 const [year, month, day] = dateStr.split('-');
                 const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
                 dateStr = `${parseInt(day)} de ${months[parseInt(month) - 1]} de ${year}`;
             } else {
-                dateStr = 'Momento Especial';
+                const today = new Date();
+                const options = { day: 'numeric', month: 'long', year: 'numeric' };
+                dateStr = today.toLocaleDateString('es-ES', options);
             }
 
             if (!selectedBase64Image) {
@@ -556,7 +577,8 @@ async function initLoveMemories() {
                 triggerHeartBurst(rect.left + rect.width / 2, rect.top);
             }
 
-            memoryModal.classList.remove('visible');
+            if (memoryModal) memoryModal.classList.remove('visible');
+            if (directInput) directInput.value = '';
             renderMemories();
         });
     }
